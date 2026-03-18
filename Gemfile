@@ -25,3 +25,5 @@ group :development do
   gem "web-console"
 end
 
+
+gem "image_processing", "~> 1.14"
