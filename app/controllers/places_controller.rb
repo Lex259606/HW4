@@ -1,6 +1,5 @@
-before_action :force_login
 class PlacesController < ApplicationController
-
+before_action :force_login
   def index
     @places = Place.all
   end

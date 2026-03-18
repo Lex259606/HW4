@@ -1,6 +1,5 @@
-before_action :force_login
 class EntriesController < ApplicationController
-
+before_action :force_login
   def new
     # This renders the form to create a new entry
   end
