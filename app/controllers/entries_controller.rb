@@ -1,3 +1,4 @@
+before_action :force_login
 class EntriesController < ApplicationController
 
   def new
