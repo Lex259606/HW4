@@ -1,3 +1,4 @@
+before_action :force_login
 class PlacesController < ApplicationController
 
   def index
