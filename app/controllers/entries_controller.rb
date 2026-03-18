@@ -5,16 +5,23 @@ class EntriesController < ApplicationController
   end
 
   def create
+    # 1. Initialize a new Entry object
     @entry = Entry.new
-    @entry["title"] = params["title"]
-    @entry["description"] = params["description"]
-    @entry["occurred_on"] = params["occurred_on"]
-    @entry["place_id"] = params["place_id"]
+
+    # 2. Extract data from the "entry" hash in params
+    @entry["title"] = params["entry"]["title"]
+    @entry["description"] = params["entry"]["description"]
+    @entry["occurred_on"] = params["entry"]["occurred_on"]
+    @entry["place_id"] = params["entry"]["place_id"]
     
-    # --- ADD THIS LINE ---
-    # Assign the entry to the person currently logged in
+    # 3. Assign the entry to the person currently logged in
     @entry["user_id"] = @current_user.id 
     
+    # 4. Attach the uploaded file using Active Storage
+    # This line connects the image file to the database record
+    @entry.uploaded_image.attach(params["entry"]["uploaded_image"])
+
+    # 5. Save and Redirect
     @entry.save
     redirect_to "/places/#{@entry["place_id"]}"
   end
