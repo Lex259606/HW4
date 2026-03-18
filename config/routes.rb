@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  # This sets your homepage to the list of places
-  get("/", { :controller => "places", :action => "index" })
+  # 1. The Homepage
+  root "places#index"
 
-  # Custom routes for a better user experience
-  get("/login", { :controller => "sessions", :action => "new" })
-  get("/logout", { :controller => "sessions", :action => "destroy" })
+  # 2. Authentication (Login/Logout)
+  # We use specific named routes for these to make it easier to link to
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  get "/logout", to: "sessions#destroy"
 
-  resources "entries"
+  # 3. Resources (The "Must-Haves")
   resources "places"
-  resources "sessions"
+  resources "entries"
   resources "users"
+  
+  # 4. Fallback for the root if you prefer the old syntax:
+  # get "/", controller: "places", action: "index"
 end
 
