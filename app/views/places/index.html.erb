@@ -7,25 +7,26 @@
   </div>
 </div>
 
-<hr class="mb-5">
+<hr class="mb-5" style="opacity: 0.1;">
 
 <div class="row">
   <% if @places.any? %>
     <% for place in @places %>
       <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <div class="card-body p-0 text-center">
+        <div class="card h-100" style="border: 1px solid #eee !important; background-color: #fff !important; transition: all 0.3s ease;">
+          <div class="card-body p-5 text-center">
             
-            <h3 class="h4 mb-3 text-dark">
+            <h3 class="h4 mb-2 text-dark">
               <%= place["name"] %> 
-              <span class="badge ms-1">
-                (<%= Entry.where({ "place_id" => place["id"] }).count %>)
-              </span>
             </h3>
             
+            <p class="text-muted small italic mb-4" style="font-family: 'Playfair Display', serif; letter-spacing: 1px;">
+              <%= Entry.where({ "place_id" => place["id"] }).count %> Entries
+            </p>
+            
             <div class="mt-4">
-              <a href="/places/<%= place["id"] %>" class="text-dark text-uppercase small fw-bold text-decoration-none border-bottom pb-1" style="letter-spacing: 2px;">
-                Explore Entries &rarr;
+              <a href="/places/<%= place["id"] %>" class="text-dark text-uppercase small fw-bold text-decoration-none border-bottom pb-1" style="letter-spacing: 2px; font-size: 0.7rem;">
+                Explore &rarr;
               </a>
             </div>
 
@@ -36,7 +37,7 @@
   <% else %>
     <div class="col-12 text-center py-5">
       <div class="py-5">
-        <h2 class="display-6 italic">Welcome to your Travel Journal</h2>
+        <h2 class="display-6 italic" style="font-family: 'Playfair Display', serif;">Welcome to your Travel Journal</h2>
         <p class="lead text-secondary mb-4">Your collection is currently empty.</p>
         <div class="mt-4">
           <a href="/places/new" class="btn btn-primary btn-lg">Begin Your Journey</a>
