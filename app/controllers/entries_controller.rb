@@ -7,31 +7,26 @@ class EntriesController < ApplicationController
   end
 
   def create
-    # 1. Initialize a new Entry object
     @entry = Entry.new
 
-    # 2. Extract data from the "entry" hash in params
-    # Using .dig or the nested hash helps prevent crashes if a key is missing
+    # Use the bracket syntax for consistency with your other controllers
     @entry["title"] = params["entry"]["title"]
     @entry["description"] = params["entry"]["description"]
     @entry["occurred_on"] = params["entry"]["occurred_on"]
     @entry["place_id"] = params["entry"]["place_id"]
     
-    # 3. Assign the entry to the person currently logged in
-    # We use @current_user.id because before_action :current_user sets this up
-    @entry["user_id"] = @current_user.id 
+    # FIX: Use session[:user_id] directly to avoid "undefined method id" errors
+    @entry["user_id"] = session[:user_id] 
     
-    # 4. Attach the uploaded file using Active Storage
-    # We wrap this in an 'if' so it doesn't crash if the user forgets a photo
+    # Attach the image only if it exists in the params
     if params["entry"]["uploaded_image"]
       @entry.uploaded_image.attach(params["entry"]["uploaded_image"])
     end
 
-    # 5. Save and Redirect
     if @entry.save
       redirect_to "/places/#{@entry["place_id"]}", notice: "Entry was successfully created."
     else
-      # If save fails (validation error), go back to the 'new' form
+      # Re-initialize place_id so the 'new' form doesn't break on re-render
       render :new, status: :unprocessable_entity
     end
   end
