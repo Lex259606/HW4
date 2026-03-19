@@ -6,16 +6,15 @@ before_action :force_login
 end
 
 
-  def show
-    @place = Place.find_by({ "id" => params["id"] })
-    
-    # --- EDIT THIS LINE ---
-    # Only find entries for this place AND for the person currently logged in
-    if @current_user
-      @entries = Entry.where({ "place_id" => @place["id"], "user_id" => @current_user["id"] })
-    else
-      @entries = [] # If not logged in, show nothing
-    end
+def show
+  @place = Place.find_by({ "id" => params["id"] })
+  
+  # This version is safer and matches your index logic
+  @entries = Entry.where({ 
+    "place_id" => @place["id"], 
+    "user_id" => session["user_id"] 
+  })
+end
   end
 
   def new
