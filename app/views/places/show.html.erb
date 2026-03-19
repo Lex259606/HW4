@@ -7,38 +7,26 @@
 <div class="row mb-4">
   <div class="col-12">
     <% if @current_user %>
-      <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-outline-dark border-3 fw-bold">New Post</a>
-    <% end %>
-  </div>
-</div>
-
 <div class="row">
   <% for entry in @entries %>
     <div class="col-md-4 mb-4">
+      
       <div class="card h-100 shadow-sm">
-        
         <% if entry.uploaded_image.attached? %>
           <%= image_tag entry.uploaded_image, class: "card-img-top" %>
         <% else %>
           <div class="bg-light text-center py-5 border-bottom">
-            <span class="text-muted">No Image</span>
+            <span class="text-muted">No Photo</span>
           </div>
         <% end %>
 
         <div class="card-body">
-          <h5 class="card-title"><%= entry["title"] %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><%= entry["occurred_on"] %></h6>
+          <h5 class="card-title fw-bold"><%= entry["title"] %></h5>
+          <p class="text-muted small"><%= entry["occurred_on"] %></p>
           <p class="card-text"><%= entry["description"] %></p>
         </div>
       </div>
+
     </div>
   <% end %>
-</div>
-
-<hr>
-
-<div class="row">
-  <div class="col-12">
-    <a href="/places" class="btn btn-link">Back to All Places</a>
-  </div>
 </div>
