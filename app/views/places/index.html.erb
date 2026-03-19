@@ -1,9 +1,9 @@
-<div class="row mb-4 align-items-center">
+<div class="row mb-5 align-items-center">
   <div class="col-md-8">
-    <h1 class="display-4 fw-bold">Places</h1>
+    <h1 class="display-4">The Destinations</h1>
   </div>
   <div class="col-md-4 text-md-end">
-    <a href="/places/new" class="btn btn-primary shadow-sm">+ New Place</a>
+    <a href="/places/new" class="btn btn-primary">+ Add a Destination</a>
   </div>
 </div>
 
@@ -12,31 +12,34 @@
 <div class="row">
   <% if @places.any? %>
     <% for place in @places %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-body p-4 text-center">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body p-0 text-center">
             
-            <h3 class="card-title h5 mb-4 text-dark">
+            <h3 class="h4 mb-3 text-dark">
               <%= place["name"] %> 
-              <span class="badge rounded-pill bg-light text-primary border ms-2" style="font-size: 0.8rem;">
-                <%= Entry.where({ "place_id" => place["id"] }).count %>
+              <span class="badge ms-1">
+                (<%= Entry.where({ "place_id" => place["id"] }).count %>)
               </span>
             </h3>
             
-            <a href="/places/<%= place["id"] %>" class="btn btn-outline-primary w-100">
-              View Entries
-            </a>
+            <div class="mt-4">
+              <a href="/places/<%= place["id"] %>" class="text-dark text-uppercase small fw-bold text-decoration-none border-bottom pb-1" style="letter-spacing: 2px;">
+                Explore Entries &rarr;
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
     <% end %>
   <% else %>
     <div class="col-12 text-center py-5">
-      <div class="card bg-light border-0 py-5">
-        <h2 class="text-muted">Welcome to your Travel Journal!</h2>
-        <p class="lead text-secondary">You haven't added any places yet.</p>
-        <div class="mt-3">
-          <a href="/places/new" class="btn btn-primary btn-lg">Click here to add your first city</a>
+      <div class="py-5">
+        <h2 class="display-6 italic">Welcome to your Travel Journal</h2>
+        <p class="lead text-secondary mb-4">Your collection is currently empty.</p>
+        <div class="mt-4">
+          <a href="/places/new" class="btn btn-primary btn-lg">Begin Your Journey</a>
         </div>
       </div>
     </div>
