@@ -24,7 +24,11 @@
 
         <div class="card-body">
           <h5 class="card-title fw-bold"><%= entry["title"] %></h5>
-          <p class="text-muted small mb-2"><%= entry["occurred_on"] %></p>
+          
+          <p class="text-muted small mb-2">
+            <%= entry["occurred_on"].strftime("%B %e, %Y") %>
+          </p>
+          
           <p class="card-text"><%= entry["description"] %></p>
         </div>
       </div>
