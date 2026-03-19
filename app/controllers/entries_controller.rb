@@ -2,8 +2,10 @@ class EntriesController < ApplicationController
   before_action :force_login
 
   def new
+  # THIS IS WHERE THE CHANGE GOES:
+    @place = Place.find_by({ "id" => params["place_id"] })
     @entry = Entry.new
-    @entry["place_id"] = params["place_id"]
+    @entry["place_id"] = @place["id"]
   end
 
   def create
