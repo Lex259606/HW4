@@ -15,7 +15,13 @@
       <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm border-0">
           <div class="card-body p-4 text-center">
-            <h3 class="card-title h5 mb-4 text-dark"><%= place["name"] %></h3>
+            
+            <h3 class="card-title h5 mb-4 text-dark">
+              <%= place["name"] %> 
+              <span class="badge rounded-pill bg-light text-primary border ms-2" style="font-size: 0.8rem;">
+                <%= Entry.where({ "place_id" => place["id"] }).count %>
+              </span>
+            </h3>
             
             <a href="/places/<%= place["id"] %>" class="btn btn-outline-primary w-100">
               View Entries
