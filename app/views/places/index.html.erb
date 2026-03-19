@@ -10,15 +10,27 @@
 <hr class="mb-5">
 
 <div class="row">
-  <% for place in @places %>
-    <div class="col-md-4 mb-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body p-4 text-center">
-          <h3 class="card-title h5 mb-4 text-dark"><%= place["name"] %></h3>
-          
-          <a href="/places/<%= place["id"] %>" class="btn btn-outline-primary w-100">
-            View Entries
-          </a>
+  <% if @places.any? %>
+    <% for place in @places %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body p-4 text-center">
+            <h3 class="card-title h5 mb-4 text-dark"><%= place["name"] %></h3>
+            
+            <a href="/places/<%= place["id"] %>" class="btn btn-outline-primary w-100">
+              View Entries
+            </a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="col-12 text-center py-5">
+      <div class="card bg-light border-0 py-5">
+        <h2 class="text-muted">Welcome to your Travel Journal!</h2>
+        <p class="lead text-secondary">You haven't added any places yet.</p>
+        <div class="mt-3">
+          <a href="/places/new" class="btn btn-primary btn-lg">Click here to add your first city</a>
         </div>
       </div>
     </div>
