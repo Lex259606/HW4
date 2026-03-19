@@ -50,7 +50,8 @@ Rails.application.configure do
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
-
+  # Use local disk storage for uploaded files when no other service is configured.
+  config.active_storage.service = :local
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
